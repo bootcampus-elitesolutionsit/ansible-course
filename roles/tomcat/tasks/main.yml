@@ -33,8 +33,8 @@
       group: tomcat
       owner: tomcat
   
-  - name: Move files to the /opt/tomcat8 directory
-    shell: "mv /opt/tomcat8/apache*/* /opt/tomcat8"
+  # - name: Move files to the /opt/tomcat8 directory
+  #   shell: "mv /opt/tomcat8/apache*/* /opt/tomcat8"
 
   - name: Creating a service file
     copy:
@@ -66,3 +66,23 @@
       name: tomcat
       enabled: yes
       state: started
+
+
+  - name: Stop Tomcat
+    command: sh /opt/tomcat8/bin/shutdown.sh
+    when: ansible_distribution == "Ubuntu"
+
+  - name: Remove Tomcat
+    file:
+      path: /opt/tomcat8
+      state: absent
+
+  - name: remove user "tomcat"
+    user:
+      name: tomcat
+      state: absent
+
+  - name: remove group "tomcat"
+    group:
+      name: tomcat
+      state: absent

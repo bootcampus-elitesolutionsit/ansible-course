@@ -6,6 +6,6 @@ variable "secret_key" {
   type = string
 }
 
-variable "user_data" {
-  type = string
-}
+# variable "user_data" {
+#   type = string
+# }
